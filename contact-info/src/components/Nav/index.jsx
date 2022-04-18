@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -16,7 +16,7 @@ return(
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                     Contact Information
                     </Typography>
-                    <AddContactForm addContact={props.contacts} contacts={props.addContact}/>
+                    <AddContactForm setAddContacts = {props.setContacts} addContacts = {props.contacts}/>
                 </Toolbar>
             </AppBar>
         </Box>

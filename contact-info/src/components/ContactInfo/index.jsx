@@ -26,13 +26,13 @@ function createData(firstName, lastName, phoneNo, street, postcode, city) {
     return {firstName, lastName, phoneNo, street, postcode, city};
 }
 
-const rows =[
+const contacts =[
     createData('Vin', 'Fast', '046618760', 'Rakatulina', '00420', 'Helsinki'),
     createData('Jake', 'Ng', '046619960', 'Latutulina', '00410', 'Vantaa'),
     createData('Henri', 'Val', '046600960', 'Rakatkala', '00440', 'Espoo'),
 
 ]
-export default function ContactInfo() {
+export default function ContactInfo(props) {
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
    
@@ -74,7 +74,7 @@ export default function ContactInfo() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows
+            {contacts
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => {
                 return (
@@ -98,7 +98,7 @@ export default function ContactInfo() {
       <TablePagination
         rowsPerPageOptions={[10, 25, 100]}
         component="div"
-        count={rows.length}
+        count={contacts.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onPageChange={handleChangePage}

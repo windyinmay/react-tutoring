@@ -11,7 +11,7 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 export default function AddContactForm (props) {
     const [open, setOpen] = useState(false);
-    const [contact, setContact] = useState({
+    const [addContact, setAddContact] = useState({
         firstName: '',
         lastName: '',
         phoneNo: '',
@@ -19,6 +19,7 @@ export default function AddContactForm (props) {
         postcode: '',
         city:''
     })
+    console.log(props.setAddContacts)
 
     const handleClickOpen = () => {
         setOpen(true)
@@ -29,12 +30,12 @@ export default function AddContactForm (props) {
     };
 
     const inputChanged = (e) => {
-        setContact({...contact, [e.target.name]: e.target.value})
+        setAddContact({...addContact, [e.target.name]: e.target.value})
     };
-    console.log(inputChanged)
+    console.log(addContact)
 
-    const handleSave = () => {
-       props.addContact([...props.contacts, contact]);
+    const handleSave = (e) => {
+       props.setAddContacts([...props.addContacts, addContact]);
        handleClose();
     }
 
@@ -52,7 +53,7 @@ export default function AddContactForm (props) {
                     margin="dense"
                     onChange={inputChanged}
                     name="firstName"
-                    value={contact.firstName}
+                    value={addContact.firstName}
                     label="First Name"
                     type= "text"
                     fullWidth
@@ -63,7 +64,7 @@ export default function AddContactForm (props) {
                     margin="dense"
                     onChange={inputChanged}
                     name="lastName"
-                    value={contact.lastName}
+                    value={addContact.lastName}
                     label="Last Name"
                     type= "text"
                     fullWidth
@@ -74,7 +75,7 @@ export default function AddContactForm (props) {
                     margin="dense"
                     onChange={inputChanged}
                     name="phoneNo"
-                    value={contact.phoneNo}
+                    value={addContact.phoneNo}
                     label="Phone Number"
                     type= "text"
                     fullWidth
@@ -85,7 +86,7 @@ export default function AddContactForm (props) {
                     margin="dense"
                     onChange={inputChanged}
                     name="street"
-                    value={contact.street}
+                    value={addContact.street}
                     label="Street"
                     type= "text"
                     fullWidth
@@ -96,7 +97,7 @@ export default function AddContactForm (props) {
                     margin="dense"
                     onChange={inputChanged}
                     name="postcode"
-                    value={contact.postcode}
+                    value={addContact.postcode}
                     label="Post Code"
                     type= "text"
                     fullWidth
@@ -107,7 +108,7 @@ export default function AddContactForm (props) {
                     margin="dense"
                     onChange={inputChanged}
                     name="city"
-                    value={contact.city}
+                    value={addContact.city}
                     label="City"
                     type= "text"
                     fullWidth
