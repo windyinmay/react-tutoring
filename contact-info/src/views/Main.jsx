@@ -39,6 +39,7 @@ export default function Main() {
                 }
         }
     ]);
+    console.log(contacts)
     return(
         <div>
         <Navigation setContacts={setContacts} contacts={contacts}/>

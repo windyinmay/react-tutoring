@@ -5,8 +5,9 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
-import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
+
+import EditContactForm from '../EditContactForm'
 
 
 export default function ContactInfo(props) {
@@ -15,12 +16,13 @@ export default function ContactInfo(props) {
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>First Name</TableCell>
-            <TableCell>Last Name</TableCell>
-            <TableCell>Phone number</TableCell>
-            <TableCell>Street</TableCell>
-            <TableCell>Postcode</TableCell>
-            <TableCell>City</TableCell>
+            <TableCell><b>First Name</b></TableCell>
+            <TableCell><b>Last Name</b></TableCell>
+            <TableCell><b>Phone number</b></TableCell>
+            <TableCell><b>Street</b></TableCell>
+            <TableCell><b>Postcode</b></TableCell>
+            <TableCell><b>City</b></TableCell>
+            <TableCell></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -37,6 +39,9 @@ export default function ContactInfo(props) {
               <TableCell>{contact.address.street}</TableCell>
               <TableCell>{contact.address.postcode}</TableCell>
               <TableCell>{contact.address.city}</TableCell>
+              <TableCell>
+                <button onClick={() => <EditContactForm editedContact= {props.contacts}/>}>Edit</button>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>

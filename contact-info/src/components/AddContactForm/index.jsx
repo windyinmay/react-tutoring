@@ -10,6 +10,7 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 
 export default function AddContactForm (props) {
+    console.log(props.setAddContacts)
     const [open, setOpen] = useState(false);
     const [addContact, setAddContact] = useState({
         firstName: '',
@@ -19,7 +20,6 @@ export default function AddContactForm (props) {
         postcode: '',
         city:''
     })
-    console.log(props.setAddContacts)
 
     const handleClickOpen = () => {
         setOpen(true)
@@ -34,11 +34,11 @@ export default function AddContactForm (props) {
     };
     console.log(addContact)
 
-    const handleSave = (e) => {
-       props.setAddContacts([...props.addContacts, addContact]);
-       handleClose();
+    const handleSave = () => {
+        console.log(addContact)
+        props.setAddContacts([...props.addContacts, addContact]);
+        handleClose();
     }
-
     return (
         <div>
             <IconButton aria-label="add-contact-info" component="span" onClick={handleClickOpen}>
