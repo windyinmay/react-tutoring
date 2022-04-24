@@ -16,7 +16,7 @@ return(
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                     Contact Information
                     </Typography>
-                    <AddContactForm setAddContacts = {props.setContacts} addContacts = {props.contacts}/>
+                    <AddContactForm setContacts={props.setContacts} contacts={props.contacts}/>
                 </Toolbar>
             </AppBar>
         </Box>

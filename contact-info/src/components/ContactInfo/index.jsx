@@ -26,9 +26,9 @@ export default function ContactInfo(props) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {props.contacts.map((contact) => (
+          {props.contacts.map((contact, index) => (
             <TableRow
-              key={contact.name}
+              key={index}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">

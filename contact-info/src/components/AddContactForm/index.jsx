@@ -10,16 +10,18 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 
 export default function AddContactForm (props) {
-    console.log(props.setAddContacts)
     const [open, setOpen] = useState(false);
     const [addContact, setAddContact] = useState({
         firstName: '',
         lastName: '',
         phoneNo: '',
-        street:'',
-        postcode: '',
-        city:''
     })
+
+    const [address, setAddress] = useState({
+        street: '',
+        postcode: '',
+        city: '',
+    },)
 
     const handleClickOpen = () => {
         setOpen(true)
@@ -32,11 +34,17 @@ export default function AddContactForm (props) {
     const inputChanged = (e) => {
         setAddContact({...addContact, [e.target.name]: e.target.value})
     };
+
+    const addressChanged = (e) => {
+        setAddress({...address, [e.target.name]: e.target.value})
+    };
+
     console.log(addContact)
 
     const handleSave = () => {
         console.log(addContact)
-        props.setAddContacts([...props.addContacts, addContact]);
+        console.log(address)
+        props.setContacts([...props.contacts, {...addContact, address: address}]);
         handleClose();
     }
     return (
@@ -84,9 +92,9 @@ export default function AddContactForm (props) {
                 <TextField
                     autoFocus
                     margin="dense"
-                    onChange={inputChanged}
+                    onChange={addressChanged}
                     name="street"
-                    value={addContact.street}
+                    value={address.street}
                     label="Street"
                     type= "text"
                     fullWidth
@@ -95,9 +103,9 @@ export default function AddContactForm (props) {
                 <TextField
                     autoFocus
                     margin="dense"
-                    onChange={inputChanged}
+                    onChange={addressChanged}
                     name="postcode"
-                    value={addContact.postcode}
+                    value={address.postcode}
                     label="Post Code"
                     type= "text"
                     fullWidth
@@ -106,9 +114,9 @@ export default function AddContactForm (props) {
                 <TextField
                     autoFocus
                     margin="dense"
-                    onChange={inputChanged}
+                    onChange={addressChanged}
                     name="city"
-                    value={addContact.city}
+                    value={address.city}
                     label="City"
                     type= "text"
                     fullWidth
