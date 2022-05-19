@@ -1,38 +1,46 @@
 import React, {useEffect, useState} from 'react';
 
 export default function JsQuestions() {
-    const [error, setError] = useState(null);
-    const [isLoaded, setIsLoaded] = useState(false);
-    const [items, setItems] = useState([]);
+    const [jsQuestion, setJsQuestion] = useState([]);
 
-    useEffect(() => {
+    const fetchData = () => {
         fetch('https://stackoverflow-api-py.herokuapp.com/api/javascript')
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    setIsLoaded(true);
-                    setItems(result);
-                },
-                (error) => {
-                    setIsLoaded(true);
-                    setError(error);
-                }
-            )
-    }, [])
-    if (error) {
-        return <div>Error: {error.message}</div>;
-      } else if (!isLoaded) {
-        return <div>Loading...</div>;
-      } else {
-        return (
-          <ul>
-            {items.map(item => (
-              <li key={item.tags}>
-                {item.question} {item.link}
-              </li>
-            ))}
-          </ul>
-        );
-      }
+            .then(res => {
+                console.log(res)
+                return res.json()
+            })
+            .then(resData => setJsQuestion(resData)
+            .catch(err => console.error(err))   
+            );
     }
-    
+    console.log(jsQuestion);
+    useEffect(() => {
+        fetchData();
+    }, [])
+    console.log(jsQuestion);
+    return (
+        <div>
+            <h2>JavaScript Questions from StackOver Flow</h2>
+            <table>
+                <tbody>
+                    <tr>
+                        <th>Question</th>
+                        <th>Link</th>
+                        <th>Summary</th>
+                        <th>Answer</th>
+                    </tr>
+                    {
+                        jsQuestion.slice(1).map((item, index) =>
+                            <tr key={index}>
+                                <td>{item.question}</td>
+                                <td>{item.links}</td>
+                                <td>{item.summary}</td>
+                                <td>{item.answers}</td>
+                            </tr>
+                        )
+                    }
+                </tbody>
+            </table>
+        </div>
+    )
+}
