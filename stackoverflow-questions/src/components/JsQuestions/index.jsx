@@ -1,46 +1,43 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
+import { DataGrid } from '@mui/x-data-grid';
+import axios from 'axios';
 
 export default function JsQuestions() {
     const [jsQuestion, setJsQuestion] = useState([]);
 
-    const fetchData = () => {
-        fetch('https://stackoverflow-api-py.herokuapp.com/api/javascript')
-            .then(res => {
-                console.log(res)
-                return res.json()
-            })
-            .then(resData => setJsQuestion(resData)
-            .catch(err => console.error(err))   
-            );
-    }
-    console.log(jsQuestion);
-    useEffect(() => {
-        fetchData();
-    }, [])
-    console.log(jsQuestion);
+    const fetchData = async () => await axios.get('https://stackoverflow-api-py.herokuapp.com/api/javascript')
+        .then((res) => res.json())
+        .then(resData => setJsQuestion(resData))
+        .catch(err => console.log(err));
+    
+    useEffect(() => async () => {
+        const questions = await fetchData();
+        setJsQuestion(questions);
+        console.log(jsQuestion);
+        //ask again about life cycle
+    }, [jsQuestion])
+
+    const columns = [
+        {field: 'questions', headName: 'Questions', width: 120},
+        { field: 'links', headName: 'Links', width: 150 },
+        { field: 'answers', headName: 'Answers', width: 50 },
+        { field: 'votes', headName: 'Votes', width: 50 },
+        { field: 'tags', headName: 'Tags', width: 120 }
+    ]
+        
     return (
         <div>
-            <h2>JavaScript Questions from StackOver Flow</h2>
-            <table>
-                <tbody>
-                    <tr>
-                        <th>Question</th>
-                        <th>Link</th>
-                        <th>Summary</th>
-                        <th>Answer</th>
-                    </tr>
-                    {
-                        jsQuestion.slice(1).map((item, index) =>
-                            <tr key={index}>
-                                <td>{item.question}</td>
-                                <td>{item.links}</td>
-                                <td>{item.summary}</td>
-                                <td>{item.answers}</td>
-                            </tr>
-                        )
-                    }
-                </tbody>
-            </table>
+            <h2>JavaScript Questions from Stack OverFlow</h2>
+            <div style={{ height: 400, width: '100%' }}>
+                <DataGrid
+                    rows={jsQuestion.slice(1)}
+                    columns={columns}
+                    pageSize={5}
+                    rowsPerPageOptions={[5]}
+                    checkboxSelection
+                    disableSelectionOnClick
+                />
+            </div>
         </div>
     )
 }
