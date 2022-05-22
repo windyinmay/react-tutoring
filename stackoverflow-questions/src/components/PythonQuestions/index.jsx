@@ -5,22 +5,33 @@ import axios from 'axios';
 export default function PythonQuestions() {
     const [PyQuestion, setPyQuestion] = useState([]);
 
-    const fetchData = async () => await axios.get('https://stackoverflow-api-py.herokuapp.com/api/python')
-        .then((res) => res.json())
-        .then(resData => setPyQuestion(resData))
-        .catch(err => console.log(err));
+    const fetchData = async () => {
+        try {
+            const res = await axios.get("https://stackoverflow-api-py.herokuapp.com/api/python")
+            return res.data
+        }
+        catch (err) {
+            console.log(err)
+        }
+    }
+    const randomizeId = () => Math.floor(Math.random() * 10000)
     
     useEffect(() => async () => {
         const questions = await fetchData();
-        setPyQuestion(questions);
-        console.log(PyQuestion);
+        const arr = []
+        questions.forEach(q => {
+            const withId = { ...q, id: randomizeId() }
+            arr.push(withId)
+        })
+        setPyQuestion(arr);
+        console.log(arr);
         //ask again about life cycle
     }, [PyQuestion])
 
     const columns = [
-        {field: 'questions', headName: 'Questions', width: 120},
-        { field: 'links', headName: 'Links', width: 150 },
-        { field: 'answers', headName: 'Answers', width: 50 },
+        {field: 'question', headName: 'Questions', width: 350},
+        { field: 'links', headName: 'Links', width: 250 },
+        { field: 'answers', headName: 'Answers', width: 100 },
         { field: 'votes', headName: 'Votes', width: 50 },
         { field: 'tags', headName: 'Tags', width: 120 }
     ]
