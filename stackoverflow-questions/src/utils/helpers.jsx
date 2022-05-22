@@ -1,0 +1,1 @@
+export const randomizeId = () => Math.floor(Math.random() * 10000)
