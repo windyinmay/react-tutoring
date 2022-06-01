@@ -1,20 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import { DataGrid } from '@mui/x-data-grid';
+import React, { useState, useEffect } from "react";
 import axios from 'axios';
-import { randomizeId } from '../../utils/helpers';
-export default function PythonQuestions() {
-    const [PyQuestion, setPyQuestion] = useState([]);
+import { DataGrid } from "@mui/x-data-grid";
+import { randomizeId } from "../../utils/helpers";
+
+
+export default function CQuestions() {
+    const [CQuestion, setCQuestion] = useState([]);
 
     const fetchData = async () => {
         try {
-            const res = await axios.get("https://stackoverflow-api-py.herokuapp.com/api/python")
+            const res = await axios.get('https://stackoverflow-api-py.herokuapp.com/api/C')
             return res.data
-        }
-        catch (err) {
+        } catch (err) {
             console.log(err)
         }
     }
-    
     useEffect(() => async () => {
         const questions = await fetchData();
         const arr = []
@@ -22,10 +22,10 @@ export default function PythonQuestions() {
             const withId = { ...q, id: randomizeId() }
             arr.push(withId)
         })
-        setPyQuestion(arr);
+        setCQuestion(arr);
         console.log(arr);
         //ask again about life cycle
-    }, [PyQuestion])
+    }, [CQuestion])
 
     const columns = [
         {field: 'question', headName: 'Questions', minWidth: 350, flex: 1},
@@ -37,10 +37,10 @@ export default function PythonQuestions() {
         
     return (
         <div>
-            <h2>Python Questions from Stack OverFlow</h2>
+            <h2>C Questions from Stack OverFlow</h2>
             <div style={{display:'table',tableLayout:'fixed', height: 400, width: '100%' }}>
                 <DataGrid
-                    rows={PyQuestion.slice(1)}
+                    rows={CQuestion.slice(1)}
                     columns={columns}
                     pageSize={5}
                     rowsPerPageOptions={[5]}

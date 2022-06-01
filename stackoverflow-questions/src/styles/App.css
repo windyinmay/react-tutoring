@@ -36,3 +36,38 @@
     transform: rotate(360deg);
   }
 }
+
+/* .Content-fill {
+  position: "absolute",
+  left: "absolute",
+  right: 0,
+  top: 0,
+  bottom: 0
+}
+
+.Content {
+  position: "absolute",
+  left: 0,
+  right: 0,
+  top: 0,
+  bottom: 0,
+  top: "40px",
+  textAlign: "center"
+}
+
+.App-nav {
+  padding: 0,
+  margin: 0px,
+  position: "absolute",
+  top: 0,
+  height: "40px",
+  width: "100%",
+  display: "flex"
+}
+
+.Nav-item {
+  textAlign: "center",
+  flex: 1,
+  listStyleType: "none",
+  padding: "10px"
+} */
