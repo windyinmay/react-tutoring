@@ -8,7 +8,7 @@ export default function Routers() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/home" element={<Home/>} />
+                <Route path="/" element={<Home/>} />
                 <Route index element={<Home/>} />
                 <Route path="js-questions" element={<JsQuestions/>}/>
                 <Route path="python-questions" element={<PythonQuestions/>} />
